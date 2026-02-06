@@ -222,6 +222,41 @@
             </a>
         </div>
 
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Guess-Number/" target="_blank">
+                <img src="Guess Number.png" alt="Guess Number Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Pong/" target="_blank">
+                <img src="Pong.png" alt="Pong Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Rock-Paper-Scissors/" target="_blank">
+                <img src="Rock paper scissors.png" alt="Rock Paper Scissors Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Snake/" target="_blank">
+                <img src="Snake.png" alt="Snake Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Tear/" target="_blank">
+                <img src="Tear.png" alt="Tear Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
         <div class="game-card" id="secret-card">
             <a href="https://platon-lab.github.io/-/" target="_blank">
                 <div class="devilish-content">
@@ -240,6 +275,7 @@
             document.body.classList.add('glitch-mode');
             
             // 2. Додаємо глюки всім звичайним карткам
+            // (Це спрацює і для нових ігор, бо у них є клас .game-item)
             const cards = document.querySelectorAll('.game-item');
             cards.forEach(card => {
                 card.classList.add('glitch-active');
@@ -249,7 +285,7 @@
             const secretCard = document.getElementById('secret-card');
             secretCard.style.display = 'block';
 
-            // 4. Змінюємо заголовок на щось моторошне (опціонально)
+            // 4. Змінюємо заголовок на щось моторошне
             document.getElementById('main-title').innerText = 'P L A T O N  6 6 6';
             
             console.log("System failure...");
