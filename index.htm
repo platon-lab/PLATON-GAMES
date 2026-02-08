@@ -26,6 +26,7 @@
             overflow-x: hidden;
             padding: 20px;
             transition: background 2s ease;
+            user-select: none; /* Щоб текст не виділявся при швидких кліках */
         }
 
         /* Хоррор фон */
@@ -257,6 +258,20 @@
             </a>
         </div>
 
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Whack-A-Mole/" target="_blank">
+                <img src="Mole.png" alt="Whack A Mole Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Music-Game/" target="_blank">
+                <img src="Music.png" alt="Music Game Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
         <div class="game-card" id="secret-card">
             <a href="https://platon-lab.github.io/-/" target="_blank">
                 <div class="devilish-content">
@@ -269,13 +284,36 @@
     </main>
 
     <script>
-        // Чекаємо 60 секунд (60000 мілісекунд)
-        setTimeout(() => {
+        // Лічильник кліків по пустому місцю
+        let emptySpaceClicks = 0;
+        let horrorModeActivated = false;
+
+        document.addEventListener('click', (event) => {
+            // Якщо режим жаху вже активний, нічого не робимо
+            if (horrorModeActivated) return;
+
+            // Перевіряємо, чи клік був по картці гри
+            const clickedOnCard = event.target.closest('.game-card');
+
+            if (!clickedOnCard) {
+                // Якщо клік НЕ по картці (тобто по фону/пустому місцю)
+                emptySpaceClicks++;
+                console.log(`Clicks: ${emptySpaceClicks}`);
+
+                // Якщо досягли 20 кліків
+                if (emptySpaceClicks >= 20) {
+                    activateHorrorMode();
+                }
+            }
+        });
+
+        function activateHorrorMode() {
+            horrorModeActivated = true;
+            
             // 1. Додаємо клас хоррору до body
             document.body.classList.add('glitch-mode');
             
             // 2. Додаємо глюки всім звичайним карткам
-            // (Це спрацює і для нових ігор, бо у них є клас .game-item)
             const cards = document.querySelectorAll('.game-item');
             cards.forEach(card => {
                 card.classList.add('glitch-active');
@@ -289,7 +327,7 @@
             document.getElementById('main-title').innerText = 'P L A T O N  6 6 6';
             
             console.log("System failure...");
-        }, 60000);
+        }
     </script>
 </body>
 </html>
