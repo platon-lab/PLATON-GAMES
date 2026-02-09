@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platon Games</title>
+    <title>Platon Games-Прикольні ігри про песиків!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
 
@@ -26,7 +26,7 @@
             overflow-x: hidden;
             padding: 20px;
             transition: background 2s ease;
-            user-select: none; /* Щоб текст не виділявся при швидких кліках */
+            user-select: none;
         }
 
         /* Хоррор фон */
@@ -62,7 +62,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 30px;
             animation: fadeInDown 1s ease-out;
         }
 
@@ -87,11 +87,82 @@
             color: transparent; z-index: -1; filter: blur(15px); opacity: 0.7;
         }
 
+        /* Стильна кнопка лайка */
+        .like-section {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .like-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .like-button:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .like-button.active {
+            background: #ff0055;
+            border-color: #ff0055;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+        }
+
+        .like-button .heart-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .like-button.active .heart-icon {
+            transform: scale(1.2);
+            animation: heartBeat 0.8s infinite;
+        }
+
+        .thanks-msg {
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            color: #ffde00;
+            text-shadow: 0 0 10px rgba(255, 222, 0, 0.5);
+        }
+
+        .thanks-msg.show { opacity: 1; }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
         /* Глюк заголовок */
         .glitch-mode h1 {
             animation: textGlitch 0.3s infinite;
             background: linear-gradient(to right, #ff0000, #660000);
             -webkit-background-clip: text;
+        }
+
+        .glitch-mode .like-button.active {
+            background: #440000;
+            border-color: #ff0000;
+            animation: cardGlitch 0.2s infinite;
         }
 
         .games-container {
@@ -201,7 +272,22 @@
         <h1 id="main-title">Platon Games</h1>
     </header>
 
+    <div class="like-section">
+        <button class="like-button" id="like-btn">
+            <span class="heart-icon">❤</span>
+            <span id="like-count">0</span>
+        </button>
+        <div class="thanks-msg" id="thanks-text">Дякую за відгук!</div>
+    </div>
+
     <main class="games-container" id="games-grid">
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Math/" target="_blank">
+                <img src="Math.png" alt="Math Game Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
         <div class="game-card game-item">
             <a href="https://platon-lab.github.io/Tic-Tac-Love/" target="_blank">
                 <img src="Tic Tac Love.png" alt="Tic Tac Love Poster">
@@ -284,23 +370,59 @@
     </main>
 
     <script>
+        // Логіка лайків
+        const likeBtn = document.getElementById('like-btn');
+        const likeCountElem = document.getElementById('like-count');
+        const thanksMsg = document.getElementById('thanks-text');
+
+        // Отримуємо стан з пам'яті
+        let isLiked = localStorage.getItem('platon_is_liked') === 'true';
+        let totalLikes = parseInt(localStorage.getItem('platon_likes_total')) || 0;
+
+        // Оновлення UI при завантаженні
+        function updateLikeUI() {
+            likeCountElem.innerText = totalLikes;
+            if (isLiked) {
+                likeBtn.classList.add('active');
+                thanksMsg.classList.add('show');
+            } else {
+                likeBtn.classList.remove('active');
+                thanksMsg.classList.remove('show');
+            }
+        }
+
+        likeBtn.addEventListener('click', () => {
+            if (!isLiked) {
+                isLiked = true;
+                totalLikes++;
+            } else {
+                isLiked = false;
+                totalLikes--;
+            }
+            
+            // Зберігаємо в пам'ять браузера (назавжди для цього юзера)
+            localStorage.setItem('platon_is_liked', isLiked);
+            localStorage.setItem('platon_likes_total', totalLikes);
+            
+            updateLikeUI();
+        });
+
+        updateLikeUI();
+
         // Лічильник кліків по пустому місцю
         let emptySpaceClicks = 0;
         let horrorModeActivated = false;
 
         document.addEventListener('click', (event) => {
-            // Якщо режим жаху вже активний, нічого не робимо
             if (horrorModeActivated) return;
 
-            // Перевіряємо, чи клік був по картці гри
             const clickedOnCard = event.target.closest('.game-card');
+            const clickedOnLike = event.target.closest('.like-section');
 
-            if (!clickedOnCard) {
-                // Якщо клік НЕ по картці (тобто по фону/пустому місцю)
+            if (!clickedOnCard && !clickedOnLike) {
                 emptySpaceClicks++;
                 console.log(`Clicks: ${emptySpaceClicks}`);
 
-                // Якщо досягли 20 кліків
                 if (emptySpaceClicks >= 20) {
                     activateHorrorMode();
                 }
@@ -309,23 +431,17 @@
 
         function activateHorrorMode() {
             horrorModeActivated = true;
-            
-            // 1. Додаємо клас хоррору до body
             document.body.classList.add('glitch-mode');
             
-            // 2. Додаємо глюки всім звичайним карткам
             const cards = document.querySelectorAll('.game-item');
             cards.forEach(card => {
                 card.classList.add('glitch-active');
             });
 
-            // 3. Показуємо секретну картку
             const secretCard = document.getElementById('secret-card');
             secretCard.style.display = 'block';
 
-            // 4. Змінюємо заголовок на щось моторошне
             document.getElementById('main-title').innerText = 'P L A T O N  6 6 6';
-            
             console.log("System failure...");
         }
     </script>
