@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platon Games-Прикольні ігри про песиків!</title>
+    <title>Platon Games-Прикольні ігри про песиків і котиків!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
 
@@ -203,6 +203,27 @@
 
     <main class="games-container" id="games-grid">
         <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Memory-Game/" target="_blank">
+                <img src="Memory.png" alt="Memory Game Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Catch-the-item/" target="_blank">
+                <img src="Catch.png" alt="Catch Game Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Clicker-Love/" target="_blank">
+                <img src="Clicker.png" alt="Clicker Love Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
             <a href="https://platon-lab.github.io/Math/" target="_blank">
                 <img src="Math.png" alt="Math Game Poster">
                 <div class="play-overlay"><span class="play-icon">▶</span></div>
@@ -291,10 +312,11 @@
     </main>
 
     <script>
-        // Лічильник кліків по пустому місцю
         let emptySpaceClicks = 0;
         let horrorModeActivated = false;
+        let secretClickedFirst = false;
 
+        // Відстеження кліків по фону
         document.addEventListener('click', (event) => {
             if (horrorModeActivated) return;
 
@@ -308,6 +330,31 @@
                     activateHorrorMode();
                 }
             }
+        });
+
+        // Керування кліками по картках в режимі глюків
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!horrorModeActivated) return;
+
+                // Якщо натиснули на секретну гру
+                if (card.id === 'secret-card') {
+                    secretClickedFirst = true;
+                    return; // Дозволяємо перехід за посиланням секретної гри
+                }
+
+                // Якщо режим глюків активований і це звичайна гра
+                e.preventDefault();
+                
+                if (secretClickedFirst) {
+                    // Перемога: відкриваємо сайт перемоги та знімаємо глюки
+                    window.open('https://platon-lab.github.io/Glitch-WIN-game/', '_blank');
+                    disableHorrorMode();
+                } else {
+                    // Звичайний глюк
+                    window.open('https://platon-lab.github.io/Glitch-Game/', '_blank');
+                }
+            });
         });
 
         function activateHorrorMode() {
@@ -324,6 +371,25 @@
 
             document.getElementById('main-title').innerText = 'P L A T O N  6 6 6';
             console.log("System failure...");
+        }
+
+        function disableHorrorMode() {
+            horrorModeActivated = false;
+            secretClickedFirst = false;
+            emptySpaceClicks = 0;
+            
+            document.body.classList.remove('glitch-mode');
+            
+            const cards = document.querySelectorAll('.game-item');
+            cards.forEach(card => {
+                card.classList.remove('glitch-active');
+            });
+
+            const secretCard = document.getElementById('secret-card');
+            secretCard.style.display = 'none';
+
+            document.getElementById('main-title').innerText = 'Platon Games';
+            console.log("System restored.");
         }
     </script>
 </body>
