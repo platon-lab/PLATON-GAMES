@@ -315,6 +315,7 @@
         let emptySpaceClicks = 0;
         let horrorModeActivated = false;
         let secretClickedFirst = false;
+        let hasWonOnce = false; // Змінна для відстеження перемоги
 
         // Відстеження кліків по фону
         document.addEventListener('click', (event) => {
@@ -327,6 +328,12 @@
                 console.log(`Clicks: ${emptySpaceClicks}`);
 
                 if (emptySpaceClicks >= 20) {
+                    // Якщо гравець вже виграв один раз у цій сесії
+                    if (hasWonOnce) {
+                        window.open('https://platon-lab.github.io/Glitch-Again/', '_blank');
+                        emptySpaceClicks = 0; // Скидаємо лічильник
+                        return;
+                    }
                     activateHorrorMode();
                 }
             }
@@ -348,6 +355,7 @@
                 
                 if (secretClickedFirst) {
                     // Перемога: відкриваємо сайт перемоги та знімаємо глюки
+                    hasWonOnce = true; // Позначаємо, що перемога була
                     window.open('https://platon-lab.github.io/Glitch-WIN-game/', '_blank');
                     disableHorrorMode();
                 } else {
