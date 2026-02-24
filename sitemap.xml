@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://platon-lab.github.io/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url><loc>https://platon-lab.github.io/Memory-Game/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Catch-the-item/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Clicker-Love/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Math/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Tic-Tac-Love/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Flappy-Love/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Doodle-Love/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Guess-Number/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Pong/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Rock-Paper-Scissors/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Snake/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Tear/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Whack-A-Mole/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Music-Game/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Puzzle/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Voice-Game/</loc><priority>0.8</priority></url>
+  <url><loc>https://platon-lab.github.io/Fact-Game/</loc><priority>0.8</priority></url>
+
+  <url><loc>https://platon-lab.github.io/-/</loc><priority>0.5</priority></url>
+  <url><loc>https://platon-lab.github.io/Glitch-Game/</loc><priority>0.5</priority></url>
+  <url><loc>https://platon-lab.github.io/Glitch-WIN-game/</loc><priority>0.5</priority></url>
+  <url><loc>https://platon-lab.github.io/Glitch-Again/</loc><priority>0.5</priority></url>
+
+  <url>
+    <loc>https://platon-lab.github.io/PLATON-GAMES-2/</loc>
+    <priority>0.9</priority>
+  </url>
+</urlset>
