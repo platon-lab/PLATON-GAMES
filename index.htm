@@ -39,6 +39,17 @@
             background: linear-gradient(135deg, #000000, #2b0000) !important;
         }
 
+        /* --- НОВИЙ ЗОЛОТИЙ ФОН НАЗАВЖДИ --- */
+        body.ultimate-gold-mode {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00) !important;
+            animation: goldShine 5s infinite alternate;
+        }
+
+        @keyframes goldShine {
+            0% { background: linear-gradient(135deg, #FFD700, #FFA500); }
+            100% { background: linear-gradient(135deg, #FF8C00, #FFD700); }
+        }
+
         .background-circles {
             position: fixed;
             top: 0;
@@ -81,6 +92,14 @@
             color: transparent;
             text-shadow: 0px 10px 20px rgba(0,0,0,0.3);
             position: relative;
+        }
+
+        body.ultimate-gold-mode h1 {
+            background: linear-gradient(to right, #ffffff, #ffee00);
+            -webkit-background-clip: text;
+        }
+        body.ultimate-gold-mode h1::after {
+            background: linear-gradient(to right, #ffffff, #ffee00);
         }
 
         h1::after {
@@ -193,7 +212,6 @@
             .game-card { width: 90%; height: 350px; }
         }
 
-        /* --- НОВІ СТИЛІ ДЛЯ КІНЦІВКИ --- */
         #end-button {
             display: none;
             position: fixed;
@@ -238,6 +256,223 @@
             height: 100%;
             object-fit: contain;
         }
+
+        /* --- НОВІ СЕКРЕТИ З КУТАМИ --- */
+        .corner-click-zone {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: crosshair;
+        }
+        #zone-tl { top: 0; left: 0; }
+        #zone-tr { top: 0; right: 0; }
+        #zone-bl { bottom: 0; left: 0; }
+        #zone-br { bottom: 0; right: 0; }
+        
+        .corner-check {
+            display: none;
+            text-shadow: 0 0 15px #00ff00;
+            animation: checkPop 0.3s ease-out forwards;
+        }
+
+        @keyframes checkPop {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- ЕКРАН 100% ПЕРЕМОГИ --- */
+        #victory-100-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ff7b00, #ffdd00);
+            z-index: 99999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: fadeInScreen 1s ease-out;
+        }
+
+        @keyframes fadeInScreen {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .victory-title {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .upload-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        .upload-label {
+            display: inline-block;
+            background: #fff;
+            color: #ff7b00;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .upload-label:hover { transform: scale(1.05); }
+
+        #avatar-upload { display: none; }
+
+        .avatar-preview-box {
+            width: 150px; height: 150px;
+            margin: 20px auto 0;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+            overflow: hidden;
+            display: none;
+            background: #fff;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .avatar-preview-box img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+
+        .ok-btn {
+            background: #333399;
+            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            transition: 0.3s;
+            display: none;
+        }
+        .ok-btn:hover { background: #ff00cc; transform: scale(1.1); }
+
+        /* --- UI НАЙКРАЩОГО ГРАВЦЯ --- */
+        #best-player-ui {
+            display: none;
+        }
+        .player-info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px 10px 10px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .player-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.8);
+            object-fit: cover;
+        }
+        
+        .player-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        /* --- ПЕРЕМИКАЧ СВІТІВ --- */
+        .world-toggle-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .world-text {
+            color: white;
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 5px black;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 34px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #333399;
+            transition: .4s;
+            border-radius: 34px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        .slider:before {
+            position: absolute;
+            content: "🎮";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+        }
+        input:checked + .slider { background-color: #ff00cc; }
+        input:checked + .slider:before { transform: translateX(46px); content: "🌐"; }
     </style>
 </head>
 <body>
@@ -389,16 +624,163 @@
         <video id="end-video" src="End.mp4"></video>
     </div>
 
+    <!-- ЗОНИ ДЛЯ 20 КЛІКІВ У КУТАХ -->
+    <div class="corner-click-zone" id="zone-tl"><span class="corner-check">✅</span></div>
+    <div class="corner-click-zone" id="zone-tr"><span class="corner-check">✅</span></div>
+    <div class="corner-click-zone" id="zone-bl"><span class="corner-check">✅</span></div>
+    <div class="corner-click-zone" id="zone-br"><span class="corner-check">✅</span></div>
+
+    <!-- ЕКРАН 100% ПЕРЕМОГИ -->
+    <div id="victory-100-screen">
+        <h2 class="victory-title">ВИ ПРОЙШЛИ ГРУ НА 100%</h2>
+        <div class="upload-container">
+            <label for="avatar-upload" class="upload-label">ОБРАТИ АВАТАРКУ З ГАЛЕРЕЇ</label>
+            <input type="file" id="avatar-upload" accept="image/*">
+            <div class="avatar-preview-box" id="avatar-preview-box">
+                <img id="avatar-preview" src="" alt="Avatar">
+            </div>
+        </div>
+        <button class="ok-btn" id="victory-ok-btn">ОК</button>
+    </div>
+
+    <!-- UI НАЙКРАЩОГО ГРАВЦЯ (З'ЯВЛЯЄТЬСЯ НАЗАВЖДИ) -->
+    <div id="best-player-ui">
+        <div class="player-info">
+            <img src="" alt="Best Player" class="player-avatar" id="ui-avatar">
+            <span class="player-text">НАЙКРАЩИЙ ГРАВЕЦЬ!</span>
+        </div>
+        <div class="world-toggle-container">
+            <div class="world-text" id="world-text">ОБРАНО Platon Games</div>
+            <label class="switch">
+                <input type="checkbox" id="world-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
     <script>
         let emptySpaceClicks = 0;
         let horrorModeActivated = false;
         let secretClickedFirst = false;
-        let hasWonOnce = false; // Змінна для відстеження перемоги
-        let glitchDisabledForever = false; // Нова змінна для повного блокування глюків
+        let hasWonOnce = false; 
+        let glitchDisabledForever = false; 
 
-        // Відстеження кліків по фону
+        // --- ЛОГІКА СЕКРЕТНИХ КУТІВ ---
+        const cornerClicks = { tl: 0, tr: 0, bl: 0, br: 0 };
+        const cornersDone = { tl: false, tr: false, bl: false, br: false };
+        let ultimateVictoryAchieved = false;
+        let savedAvatarBase64 = "";
+
+        // Перевіряємо локальне сховище під час завантаження
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('platon100Percent') === 'true') {
+                activateUltimateGoldMode(localStorage.getItem('platonAvatarData'));
+            }
+        });
+
+        document.querySelectorAll('.corner-click-zone').forEach(zone => {
+            zone.addEventListener('click', (e) => {
+                e.stopPropagation(); // ВАЖЛИВО: щоб ці кліки не рахувалися як кліки по пустоті для хоррору!
+                if (ultimateVictoryAchieved || localStorage.getItem('platon100Percent') === 'true') return;
+
+                const zoneId = zone.id.replace('zone-', '');
+                if (cornersDone[zoneId]) return;
+
+                cornerClicks[zoneId]++;
+                console.log(`Кут ${zoneId}: ${cornerClicks[zoneId]}/20`);
+
+                if (cornerClicks[zoneId] >= 20) {
+                    cornersDone[zoneId] = true;
+                    zone.querySelector('.corner-check').style.display = 'block';
+                    checkUltimateVictory();
+                }
+            });
+        });
+
+        function checkUltimateVictory() {
+            if (cornersDone.tl && cornersDone.tr && cornersDone.bl && cornersDone.br) {
+                ultimateVictoryAchieved = true;
+                document.getElementById('victory-100-screen').style.display = 'flex';
+            }
+        }
+
+        // Завантаження аватарки з галереї та зміна розміру (щоб не перевищити ліміт пам'яті LocalStorage)
+        document.getElementById('avatar-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        // Зменшуємо фото для збереження пам'яті
+                        canvas.width = 150;
+                        canvas.height = 150;
+                        ctx.drawImage(img, 0, 0, 150, 150);
+                        
+                        savedAvatarBase64 = canvas.toDataURL('image/png');
+                        
+                        document.getElementById('avatar-preview').src = savedAvatarBase64;
+                        document.getElementById('avatar-preview-box').style.display = 'flex';
+                        document.getElementById('victory-ok-btn').style.display = 'inline-block';
+                    }
+                    img.src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('victory-ok-btn').addEventListener('click', () => {
+            // Зберігаємо назавжди!
+            localStorage.setItem('platon100Percent', 'true');
+            if (savedAvatarBase64) {
+                localStorage.setItem('platonAvatarData', savedAvatarBase64);
+            }
+            document.getElementById('victory-100-screen').style.display = 'none';
+            activateUltimateGoldMode(savedAvatarBase64);
+        });
+
+        function activateUltimateGoldMode(avatarData) {
+            ultimateVictoryAchieved = true;
+            document.body.classList.add('ultimate-gold-mode');
+            
+            // Ховаємо зони кліків, вони більше не потрібні
+            document.querySelectorAll('.corner-click-zone').forEach(z => z.style.display = 'none');
+
+            // Показуємо UI найкращого гравця
+            document.getElementById('best-player-ui').style.display = 'block';
+            
+            // Встановлюємо аватарку (якщо гравець не вибрав, буде пуста з золотою рамкою або емодзі)
+            const uiAvatar = document.getElementById('ui-avatar');
+            if (avatarData) {
+                uiAvatar.src = avatarData;
+            } else {
+                // Якщо раптом щось пішло не так і фото немає, ставимо прозорий піксель або зірочку
+                uiAvatar.style.background = '#fff';
+            }
+        }
+
+        // Логіка перемикача
+        const worldToggle = document.getElementById('world-toggle');
+        const worldText = document.getElementById('world-text');
+
+        worldToggle.addEventListener('change', () => {
+            if (worldToggle.checked) {
+                worldText.innerText = 'ОБРАНО Platon Games ALL';
+                setTimeout(() => {
+                    window.location.href = 'https://platon-lab.github.io/PLATON-GAMES-ALL/';
+                }, 500); // Невелика затримка для краси
+            } else {
+                worldText.innerText = 'ОБРАНО Platon Games';
+            }
+        });
+
+
+        // --- СТАРА ЛОГІКА ХОРРОРУ І ГЛЮКІВ (БЕЗ ЗМІН) ---
         document.addEventListener('click', (event) => {
-            if (horrorModeActivated || glitchDisabledForever) return; // Якщо глюк заблокований - нічого не робимо
+            // Відключаємо глюки, якщо активований золотий режим
+            if (horrorModeActivated || glitchDisabledForever || ultimateVictoryAchieved || localStorage.getItem('platon100Percent') === 'true') return; 
 
             const clickedOnCard = event.target.closest('.game-card');
             const clickedOnEndButton = event.target.closest('#end-button');
@@ -408,12 +790,11 @@
                 console.log(`Clicks: ${emptySpaceClicks}`);
 
                 if (emptySpaceClicks >= 20) {
-                    // Якщо гравець вже виграв один раз у цій сесії
                     if (hasWonOnce) {
                         window.open('https://platon-lab.github.io/Glitch-Again/', '_blank');
-                        emptySpaceClicks = 0; // Скидаємо лічильник
-                        glitchDisabledForever = true; // Назавжди блокуємо глюки
-                        document.getElementById('end-button').style.display = 'block'; // З'являється кнопка зі стрілочкою
+                        emptySpaceClicks = 0; 
+                        glitchDisabledForever = true; 
+                        document.getElementById('end-button').style.display = 'block'; 
                         return;
                     }
                     activateHorrorMode();
@@ -421,27 +802,22 @@
             }
         });
 
-        // Керування кліками по картках в режимі глюків
         document.querySelectorAll('.game-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 if (!horrorModeActivated) return;
 
-                // Якщо натиснули на секретну гру
                 if (card.id === 'secret-card') {
                     secretClickedFirst = true;
-                    return; // Дозволяємо перехід за посиланням секретної гри
+                    return; 
                 }
 
-                // Якщо режим глюків активований і це звичайна гра
                 e.preventDefault();
                 
                 if (secretClickedFirst) {
-                    // Перемога: відкриваємо сайт перемоги та знімаємо глюки
-                    hasWonOnce = true; // Позначаємо, що перемога була
+                    hasWonOnce = true; 
                     window.open('https://platon-lab.github.io/Glitch-WIN-game/', '_blank');
                     disableHorrorMode();
                 } else {
-                    // Звичайний глюк
                     window.open('https://platon-lab.github.io/Glitch-Game/', '_blank');
                 }
             });
@@ -489,19 +865,17 @@
             
             videoContainer.style.display = 'flex';
             
-            // Відкриваємо відео на весь екран
             if (videoContainer.requestFullscreen) {
                 videoContainer.requestFullscreen();
-            } else if (videoContainer.webkitRequestFullscreen) { /* Safari */
+            } else if (videoContainer.webkitRequestFullscreen) {
                 videoContainer.webkitRequestFullscreen();
-            } else if (videoContainer.msRequestFullscreen) { /* IE11 */
+            } else if (videoContainer.msRequestFullscreen) {
                 videoContainer.msRequestFullscreen();
             }
 
             video.play();
         });
 
-        // Перехід після завершення відео
         document.getElementById('end-video').addEventListener('ended', () => {
             window.location.href = 'https://platon-lab.github.io/PLATON-GAMES-2/';
         });
