@@ -80,9 +80,6 @@
             text-align: center;
             margin-bottom: 30px;
             animation: fadeInDown 1s ease-out;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         h1 {
@@ -476,158 +473,6 @@
         }
         input:checked + .slider { background-color: #ff00cc; }
         input:checked + .slider:before { transform: translateX(46px); content: "🌐"; }
-
-        /* ================= ПАСХАЛЬНЕ ОНОВЛЕННЯ ================= */
-        .easter-theme-btn {
-            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            color: #d800ff;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            padding: 15px 40px;
-            border: 4px solid #fff;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 20px #ff9a9e;
-            animation: bounceBtn 2s infinite;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 5px rgba(255,255,255,0.8);
-        }
-        @keyframes bounceBtn {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        #brawl-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 999999;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            user-select: none;
-        }
-
-        .rays {
-            position: absolute;
-            width: 200vw; height: 200vw;
-            background: repeating-conic-gradient(from 0deg, rgba(255, 215, 0, 0.2) 0deg 15deg, transparent 15deg 30deg);
-            animation: spin 10s linear infinite;
-            z-index: 1;
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        .brawler-container {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .brawler-img {
-            max-width: 300px;
-            max-height: 400px;
-            filter: brightness(0) drop-shadow(0 0 10px rgba(0,0,0,0.8));
-            transform: scale(0.5);
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .brawler-img.silhouette-show {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .brawler-img.revealed {
-            filter: brightness(1) drop-shadow(0 0 40px #FFD700);
-            transform: scale(1.2);
-            animation: popReveal 0.5s ease-out;
-        }
-
-        @keyframes popReveal {
-            0% { transform: scale(1); filter: brightness(10); }
-            50% { transform: scale(1.4); }
-            100% { transform: scale(1.2); filter: brightness(1) drop-shadow(0 0 40px #FFD700); }
-        }
-
-        .brawler-name {
-            font-size: 4rem;
-            color: #FFD700;
-            text-shadow: 0 5px 20px rgba(0,0,0,1);
-            margin-top: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-        .brawler-name.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .click-to-continue {
-            position: absolute;
-            bottom: 50px;
-            font-size: 1.5rem;
-            color: white;
-            opacity: 0.5;
-            animation: blinkText 1s infinite;
-            z-index: 2;
-            cursor: pointer;
-            display: none;
-            background: rgba(0,0,0,0.5);
-            padding: 10px 30px;
-            border-radius: 30px;
-            border: 2px solid white;
-        }
-        @keyframes blinkText { 50% { opacity: 1; } }
-
-        .easter-decor {
-            position: fixed;
-            font-size: 3rem;
-            z-index: -1;
-            opacity: 0.6;
-            animation: floatEgg 10s infinite linear;
-            pointer-events: none;
-        }
-        @keyframes floatEgg {
-            0% { transform: translateY(110vh) rotate(0deg); }
-            100% { transform: translateY(-10vh) rotate(360deg); }
-        }
-        
-        .new-game-unlocked {
-            font-size: 3rem;
-            color: #00ffcc;
-            text-shadow: 0 0 20px #00ffcc;
-            text-align: center;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.5s ease;
-            display: none;
-        }
-        .new-game-unlocked.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Особлива рамка для великодньої гри */
-        .easter-game-glow {
-            border: 4px solid #ff9a9e;
-            box-shadow: 0 0 40px #ff9a9e;
-            animation: easterPulse 2s infinite;
-        }
-        @keyframes easterPulse {
-            0%, 100% { box-shadow: 0 0 20px #ff9a9e; }
-            50% { box-shadow: 0 0 50px #d800ff; border-color: #d800ff; }
-        }
-        /* ======================================================= */
     </style>
 </head>
 <body>
@@ -639,7 +484,6 @@
     </div>
 
     <header class="header">
-        <button id="easter-prize-btn" class="easter-theme-btn">🎁 Забрати пасхальний приз! 🐰</button>
         <h1 id="main-title">Platon Games</h1>
     </header>
 
@@ -791,6 +635,20 @@
             </a>
         </div>
 
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/Easter-Game/" target="_blank">
+                <img src="Egg.png" alt="Easter Game Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
+        <div class="game-card game-item">
+            <a href="https://platon-lab.github.io/What-Beats-Game/" target="_blank">
+                <img src="Beat.png" alt="What Beats Game Poster">
+                <div class="play-overlay"><span class="play-icon">▶</span></div>
+            </a>
+        </div>
+
         <div class="game-card" id="secret-card">
             <a href="https://platon-lab.github.io/-/" target="_blank">
                 <div class="devilish-content">
@@ -798,13 +656,6 @@
                     <div class="devilish-text">НЕ ГРАЙ</div>
                 </div>
                 <div class="play-overlay"><span class="play-icon">♰</span></div>
-            </a>
-        </div>
-
-        <div class="game-card game-item easter-game-glow" id="easter-game-card" style="display: none;">
-            <a href="https://platon-lab.github.io/Easter-Game/" target="_blank">
-                <img src="Egg.png" alt="Easter Game Poster">
-                <div class="play-overlay" style="background: rgba(255, 154, 158, 0.4);"><span class="play-icon">▶</span></div>
             </a>
         </div>
     </main>
@@ -815,11 +666,13 @@
         <video id="end-video" src="End.mp4"></video>
     </div>
 
+    <!-- ЗОНИ ДЛЯ 20 КЛІКІВ У КУТАХ -->
     <div class="corner-click-zone" id="zone-tl"><span class="corner-check">✅</span></div>
     <div class="corner-click-zone" id="zone-tr"><span class="corner-check">✅</span></div>
     <div class="corner-click-zone" id="zone-bl"><span class="corner-check">✅</span></div>
     <div class="corner-click-zone" id="zone-br"><span class="corner-check">✅</span></div>
 
+    <!-- ЕКРАН 100% ПЕРЕМОГИ -->
     <div id="victory-100-screen">
         <h2 class="victory-title">ВИ ПРОЙШЛИ ГРУ НА 100%</h2>
         <div class="upload-container">
@@ -832,6 +685,7 @@
         <button class="ok-btn" id="victory-ok-btn">ОК</button>
     </div>
 
+    <!-- UI НАЙКРАЩОГО ГРАВЦЯ (З'ЯВЛЯЄТЬСЯ НАЗАВЖДИ) -->
     <div id="best-player-ui">
         <div class="player-info">
             <img src="" alt="Best Player" class="player-avatar" id="ui-avatar">
@@ -850,129 +704,7 @@
         <a href="https://platon-lab.github.io/Review/" target="_blank" style="display:inline-block;background:linear-gradient(45deg,#ff00cc,#333399);color:white;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.5rem;padding:18px 50px;border-radius:50px;text-decoration:none;box-shadow:0 10px 30px rgba(255,0,204,0.4);transition:transform 0.3s ease,box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 15px 40px rgba(255,0,204,0.7)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 10px 30px rgba(255,0,204,0.4)'">✍️ Написати відгук</a>
     </div>
 
-    <div id="brawl-overlay">
-        <div class="rays"></div>
-        <div class="brawler-container">
-            <img id="brawler-img" class="brawler-img" src="" alt="Brawler">
-            <div id="brawler-name" class="brawler-name"></div>
-            <div id="new-game-msg" class="new-game-unlocked">
-                🎉 НОВЕ ОНОВЛЕННЯ РОЗБЛОКОВАНО! 🎉<br><br>
-                <img src="Egg.png" style="width:200px; border-radius:30px; box-shadow:0 0 40px #fff; border:5px solid #fff;"><br><br>
-                EASTER GAME
-            </div>
-        </div>
-        <div id="brawl-continue" class="click-to-continue">Натисни, щоб продовжити</div>
-    </div>
-
     <script>
-        // --- ЛОГІКА ДЕКОРАЦІЙ ПАСХИ ---
-        const easterEmojis = ['🥚', '🐰', '🌸', '🐣', '🌷', '🎀'];
-        for(let i=0; i<15; i++) {
-            let egg = document.createElement('div');
-            egg.className = 'easter-decor';
-            egg.innerText = easterEmojis[Math.floor(Math.random() * easterEmojis.length)];
-            egg.style.left = Math.random() * 100 + 'vw';
-            egg.style.animationDuration = (Math.random() * 10 + 8) + 's';
-            egg.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(egg);
-        }
-
-        // --- ЛОГІКА АНІМАЦІЇ НОВИХ БІЙЦІВ ---
-        const brawlers = [
-            { name: "Яйціто", img: "Tito.png" },
-            { name: "Паскмартик", img: "Smartik.png" },
-            { name: "Ковбасуніор", img: "Junior.png" },
-            { name: "Хрінфіл", img: "Fil.png" },
-            { name: "Салмілка", img: "Milka.png" },
-            { name: "Холобарк", img: "Bark.png" }
-        ];
-
-        let currentBrawler = 0;
-        let brawlerState = 0; // 0 = not started, 1 = silhouette, 2 = revealed, 3 = game unlocked
-        const brawlOverlay = document.getElementById('brawl-overlay');
-        const bImg = document.getElementById('brawler-img');
-        const bName = document.getElementById('brawler-name');
-        const bContinue = document.getElementById('brawl-continue');
-        const nMsg = document.getElementById('new-game-msg');
-
-        document.getElementById('easter-prize-btn').addEventListener('click', (e) => {
-            e.stopPropagation(); // ЗАХИСТ ВІД ХОРРОР-РЕЖИМУ!
-            document.getElementById('easter-prize-btn').style.display = 'none'; 
-            brawlOverlay.style.display = 'flex';
-            currentBrawler = 0;
-            nMsg.classList.remove('show');
-            nMsg.style.display = 'none';
-            bImg.style.display = 'block';
-            bName.style.display = 'block';
-            showBrawler();
-        });
-
-        function showBrawler() {
-            if (currentBrawler >= brawlers.length) {
-                // Показуємо екран нової гри
-                bImg.style.display = 'none';
-                bName.style.display = 'none';
-                nMsg.style.display = 'block';
-                setTimeout(() => nMsg.classList.add('show'), 100);
-                bContinue.style.display = 'block';
-                bContinue.innerText = "ОК";
-                brawlerState = 3;
-                return;
-            }
-
-            brawlerState = 1;
-            const b = brawlers[currentBrawler];
-            bImg.src = b.img;
-            bImg.className = 'brawler-img'; // Скидання класів
-            bName.className = 'brawler-name'; // Скидання класів
-            bName.innerText = b.name;
-            bContinue.style.display = 'none';
-
-            // Показуємо силует
-            setTimeout(() => {
-                bImg.classList.add('silhouette-show');
-            }, 100);
-
-            // Авто-розкриття через 1.5 секунди (якщо гравець не клікнув раніше)
-            setTimeout(() => {
-                if(brawlerState === 1) revealBrawler();
-            }, 1500);
-        }
-
-        function revealBrawler() {
-            brawlerState = 2;
-            bImg.classList.add('revealed');
-            bName.classList.add('show');
-            setTimeout(() => {
-                bContinue.style.display = 'block';
-                bContinue.innerText = "Натисни, щоб продовжити";
-            }, 500);
-        }
-
-        brawlOverlay.addEventListener('click', (e) => {
-            e.stopPropagation(); // ЗАХИСТ ВІД ХОРРОР-РЕЖИМУ!
-            if (brawlerState === 1) {
-                revealBrawler(); // Пропуск очікування силуету
-            } else if (brawlerState === 2) {
-                brawlerState = 0;
-                currentBrawler++;
-                showBrawler();
-            } else if (brawlerState === 3) {
-                // Фінал - закриваємо оверлей і показуємо нову гру
-                brawlOverlay.style.display = 'none';
-                document.getElementById('easter-game-card').style.display = 'block';
-                
-                // Плавно прокручуємо вниз сторінки, щоб гравець одразу побачив нову гру
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth'
-                });
-            }
-        });
-
-
-        // --- СТАРА ЛОГІКА (БЕЗ ЗМІН) ---
-
         let emptySpaceClicks = 0;
         let horrorModeActivated = false;
         let secretClickedFirst = false;
@@ -994,7 +726,7 @@
 
         document.querySelectorAll('.corner-click-zone').forEach(zone => {
             zone.addEventListener('click', (e) => {
-                e.stopPropagation(); 
+                e.stopPropagation(); // ВАЖЛИВО: щоб ці кліки не рахувалися як кліки по пустоті для хоррору!
                 if (ultimateVictoryAchieved || localStorage.getItem('platon100Percent') === 'true') return;
 
                 const zoneId = zone.id.replace('zone-', '');
@@ -1018,7 +750,7 @@
             }
         }
 
-        // Завантаження аватарки з галереї та зміна розміру 
+        // Завантаження аватарки з галереї та зміна розміру (щоб не перевищити ліміт пам'яті LocalStorage)
         document.getElementById('avatar-upload').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -1028,6 +760,7 @@
                     img.onload = function() {
                         const canvas = document.createElement('canvas');
                         const ctx = canvas.getContext('2d');
+                        // Зменшуємо фото для збереження пам'яті
                         canvas.width = 150;
                         canvas.height = 150;
                         ctx.drawImage(img, 0, 0, 150, 150);
@@ -1045,6 +778,7 @@
         });
 
         document.getElementById('victory-ok-btn').addEventListener('click', () => {
+            // Зберігаємо назавжди!
             localStorage.setItem('platon100Percent', 'true');
             if (savedAvatarBase64) {
                 localStorage.setItem('platonAvatarData', savedAvatarBase64);
@@ -1057,18 +791,23 @@
             ultimateVictoryAchieved = true;
             document.body.classList.add('ultimate-gold-mode');
             
+            // Ховаємо зони кліків, вони більше не потрібні
             document.querySelectorAll('.corner-click-zone').forEach(z => z.style.display = 'none');
 
+            // Показуємо UI найкращого гравця
             document.getElementById('best-player-ui').style.display = 'block';
             
+            // Встановлюємо аватарку (якщо гравець не вибрав, буде пуста з золотою рамкою або емодзі)
             const uiAvatar = document.getElementById('ui-avatar');
             if (avatarData) {
                 uiAvatar.src = avatarData;
             } else {
+                // Якщо раптом щось пішло не так і фото немає, ставимо прозорий піксель або зірочку
                 uiAvatar.style.background = '#fff';
             }
         }
 
+        // Логіка перемикача
         const worldToggle = document.getElementById('world-toggle');
         const worldText = document.getElementById('world-text');
 
@@ -1077,21 +816,22 @@
                 worldText.innerText = 'ОБРАНО Platon Games ALL';
                 setTimeout(() => {
                     window.location.href = 'https://platon-lab.github.io/PLATON-GAMES-ALL/';
-                }, 500); 
+                }, 500); // Невелика затримка для краси
             } else {
                 worldText.innerText = 'ОБРАНО Platon Games';
             }
         });
 
+
+        // --- СТАРА ЛОГІКА ХОРРОРУ І ГЛЮКІВ (БЕЗ ЗМІН) ---
         document.addEventListener('click', (event) => {
+            // Відключаємо глюки, якщо активований золотий режим
             if (horrorModeActivated || glitchDisabledForever || ultimateVictoryAchieved || localStorage.getItem('platon100Percent') === 'true') return; 
 
             const clickedOnCard = event.target.closest('.game-card');
             const clickedOnEndButton = event.target.closest('#end-button');
-            const clickedOnOverlay = event.target.closest('#brawl-overlay');
-            const clickedOnEasterBtn = event.target.closest('#easter-prize-btn');
 
-            if (!clickedOnCard && !clickedOnEndButton && !clickedOnOverlay && !clickedOnEasterBtn) {
+            if (!clickedOnCard && !clickedOnEndButton) {
                 emptySpaceClicks++;
                 console.log(`Clicks: ${emptySpaceClicks}`);
 
@@ -1110,9 +850,6 @@
 
         document.querySelectorAll('.game-card').forEach(card => {
             card.addEventListener('click', (e) => {
-                // Додаємо виняток для нової великодньої гри, щоб вона не відкривала хоррор-ігри
-                if (card.id === 'easter-game-card') return; 
-
                 if (!horrorModeActivated) return;
 
                 if (card.id === 'secret-card') {
@@ -1138,9 +875,7 @@
             
             const cards = document.querySelectorAll('.game-item');
             cards.forEach(card => {
-                if(card.id !== 'easter-game-card') {
-                    card.classList.add('glitch-active');
-                }
+                card.classList.add('glitch-active');
             });
 
             const secretCard = document.getElementById('secret-card');
@@ -1169,6 +904,7 @@
             console.log("System restored.");
         }
 
+        // --- ЛОГІКА ДЛЯ КНОПКИ ТА ВІДЕО ---
         document.getElementById('end-button').addEventListener('click', () => {
             const videoContainer = document.getElementById('video-container');
             const video = document.getElementById('end-video');
