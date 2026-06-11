@@ -319,8 +319,8 @@
         }
 
         @keyframes titlePulse {
-            0%,100% { filter: drop-shadow(0 0 10px rgba(255,0,204,0.5)); }
-            50% { filter: drop-shadow(0 0 30px rgba(255,0,204,0.9)) drop-shadow(0 0 60px rgba(51,51,153,0.5)); }
+            0%,100% { filter: drop-shadow(0 0 15px rgba(255,0,204,0.7)); }
+            50% { filter: drop-shadow(0 0 35px rgba(255,0,204,1)) drop-shadow(0 0 65px rgba(51,51,153,0.7)); }
         }
 
         .header-subtitle {
@@ -569,7 +569,7 @@
             position: fixed; width: 80px; height: 80px;
             z-index: 500; display: flex;
             align-items: center; justify-content: center;
-            font-size: 2.5rem; cursor: default; /* ПРИБРАНО ЗМІНУ КУРСОРУ НА CROSSHAIR */
+            font-size: 2.5rem; cursor: default;
         }
         #zone-tl { top: 0; left: 0; }
         #zone-tr { top: 0; right: 0; }
@@ -708,25 +708,10 @@
             h1 { font-size: 2.5rem; }
             .game-card { width: 90%; height: 350px; }
             .intro-logo { font-size: 3rem; letter-spacing: 5px; }
+            .action-dock { flex-direction: column; padding: 20px; }
         }
 
         /* ===================== UPDATE SCREEN & BUTTON CSS ===================== */
-        #update-btn-container {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #update-btn-container:hover {
-            transform: scale(1.1);
-        }
-        #update-btn-container img {
-            width: 100px; /* Можеш змінити розмір за потреби */
-            height: auto;
-            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.6));
-        }
-
         #update-screen {
             display: none;
             position: fixed;
@@ -769,17 +754,67 @@
             transform: scale(1.1);
             box-shadow: 0 15px 30px rgba(255,0,204,0.7);
         }
+
+        /* ===================== ACTION DOCK ===================== */
+        .action-dock {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px 0;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out 1s backwards;
+            z-index: 10;
+            position: relative;
+        }
+
+        .action-btn {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: floatUpDown 4s infinite ease-in-out;
+        }
+
+        .action-btn:nth-child(1) { animation-delay: 0s; }
+        .action-btn:nth-child(2) { animation-delay: 0.5s; }
+        .action-btn:nth-child(3) { animation-delay: 1s; }
+
+        .action-btn img {
+            width: 100px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.6));
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.15) translateY(-10px);
+        }
+
+        .action-btn:hover img {
+            filter: drop-shadow(0 0 25px rgba(255, 0, 255, 0.9));
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
     </style>
 </head>
 <body>
 
-<!-- ===================== UPDATE SCREEN ===================== -->
 <div id="update-screen">
     <div class="update-text">V2.0 - ВЕЛИКЕ ОНОВЛЕННЯ!</div>
     <button id="close-update-btn">Назад</button>
 </div>
 
-<!-- ===================== POWER SCREEN ===================== -->
 <div id="power-screen">
     <p class="ps-title"></p>
     <label class="switch-3d">
@@ -794,7 +829,6 @@
     </label>
 </div>
 
-<!-- ===================== INTRO SCREEN ===================== -->
 <div id="intro-screen">
     <canvas class="intro-particles" id="intro-canvas"></canvas>
     <div class="intro-content">
@@ -806,7 +840,6 @@
     </div>
 </div>
 
-<!-- ===================== MAIN SITE ===================== -->
 <canvas id="particles-canvas"></canvas>
 
 <div class="background-circles">
@@ -815,7 +848,6 @@
     <div class="circle"></div>
 </div>
 
-<!-- Neon ambient orbs -->
 <div class="neon-orb"></div>
 <div class="neon-orb"></div>
 <div class="neon-orb"></div>
@@ -823,6 +855,7 @@
 <header class="header">
     <h1 id="main-title">Platon Games</h1>
     <div class="header-subtitle"></div>
+</header>
 
 <main class="games-container" id="games-grid">
 
@@ -1199,6 +1232,18 @@
 
 <button id="end-button">▶️</button>
 
+<div class="action-dock">
+    <div id="update-btn-container" class="action-btn">
+        <img src="Update.png" alt="Списки Оновлень">
+    </div>
+    <a href="https://platon-lab.github.io/OST/" target="_blank" class="action-btn" id="ost-btn-container">
+        <img src="OST.png" alt="OST">
+    </a>
+    <div id="random-btn-container" class="action-btn">
+        <img src="Random.png" alt="Рандомна Гра">
+    </div>
+</div>
+
 <div id="video-container">
     <video id="end-video" src="End.mp4"></video>
 </div>
@@ -1234,12 +1279,6 @@
     </div>
 </div>
     
-    <!-- КНОПКА ОНОВЛЕНЬ (не в кутку!) -->
-    <div id="update-btn-container">
-        <img src="Update.png" alt="Списки Оновлень">
-    </div>
-</div>
-
 <script>
     // ===================== PARTICLES (background stars) =====================
     const canvas = document.getElementById('particles-canvas');
@@ -1339,6 +1378,22 @@
         }, 2000);
     });
 
+    // ===================== ЛОГІКА РАНДОМНОЇ ГРИ =====================
+    const randomBtn = document.getElementById('random-btn-container');
+    randomBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Не даємо зарахувати як клік по пустому місцю
+        if (horrorModeActivated) return; // Відключаємо рандом під час хорору
+
+        // Вибираємо всі ігрові посилання з карток з класом game-item
+        // Це автоматично виключає secret-card, бо в неї немає класу game-item!
+        const gameCards = document.querySelectorAll('.game-item a');
+        if (gameCards.length > 0) {
+            const randomIndex = Math.floor(Math.random() * gameCards.length);
+            const randomUrl = gameCards[randomIndex].href;
+            window.open(randomUrl, '_blank');
+        }
+    });
+
     // ===================== LOGIC ЗАГАЛЬНА =====================
     let emptySpaceClicks = 0;
     let horrorModeActivated = false;
@@ -1362,7 +1417,8 @@
     const updateScreen = document.getElementById('update-screen');
     const closeUpdateBtn = document.getElementById('close-update-btn');
 
-    updateBtn.addEventListener('click', () => {
+    updateBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Не даємо зарахувати як клік по пустому місцю
         updateScreen.style.display = 'flex';
     });
 
@@ -1447,12 +1503,14 @@
 
     document.addEventListener('click', (event) => {
         if (horrorModeActivated || glitchDisabledForever || ultimateVictoryAchieved || localStorage.getItem('platon100Percent') === 'true') return;
+        
         const clickedOnCard = event.target.closest('.game-card');
         const clickedOnEndButton = event.target.closest('#end-button');
-        const clickedOnUpdateBtn = event.target.closest('#update-btn-container'); // Щоб не рахувало кліки по кнопці оновлення
+        // Оновлено: тепер ігнорує кліки по всім кнопкам у доці (щоб не викликати режим 666)
+        const clickedOnActionBtn = event.target.closest('.action-btn'); 
         const clickedOnUpdateScreen = event.target.closest('#update-screen');
 
-        if (!clickedOnCard && !clickedOnEndButton && !clickedOnUpdateBtn && !clickedOnUpdateScreen) {
+        if (!clickedOnCard && !clickedOnEndButton && !clickedOnActionBtn && !clickedOnUpdateScreen) {
             emptySpaceClicks++;
             if (emptySpaceClicks >= 20) {
                 if (hasWonOnce) {
